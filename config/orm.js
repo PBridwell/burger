@@ -2,13 +2,24 @@ const connection = require("./connection");
 
 
 const orm = {
-    selectAll: (table) => {
-        let queryString = "SELECT * FROM ??";
-        connection.query(queryString,[table], (err, result) => {
-            if (err) throw err; 
-            console.log(result);
-        })
-    }
+    selectAll: function(cb) {
+        var queryString = "SELECT * FROM burgers";
+        connection.query(queryString, function(err, result) {
+          if (err) throw err;
+          cb(result);
+        });
+      },
+      insertOne: function(value, cb) {
+        var queryString = "INSERT INTO burgers (burger_name) VALUES(?)";
+        connection.query(queryString, value, function(err, result) {
+          if (err) throw err;
+          cb(result);
+        });
+      },
+      updateOne: function() {
+
+      }
+    
 // 'orm' object end here
 };
 
