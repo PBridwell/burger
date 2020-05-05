@@ -10,7 +10,6 @@ router.post("/api/burger", function(req, res) {
     const burger_name = req.body.burger_name;
     // here 'data' is the callback. Burger_name is what we are passing.
     orm.insertOne(burger_name, function(data) {
-
         if (data.affectedRows === 1) {
             res.json({
                 msg: "Burger added!"
@@ -25,12 +24,7 @@ router.post("/api/burger", function(req, res) {
 router.get("/", function(req, res) {
     orm.selectAll(function(data) {
         console.log(data);
-        res.json(data);
-    //   var hbsObject = {
-    //     cats: data
-    //   };
-    //   console.log(hbsObject);
-    //   res.render("index", hbsObject);
+        res.render("index", {burgers: data});
     });
   });
   
